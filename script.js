@@ -9,9 +9,4 @@ var events = [
 ];
 
 
-var handler = new EventHandler(events);
-console.log(handler.events);
-var eventsBetweenDates = handler.getEventsBetweenDates("2022/02/01", "2022/02/16");
-console.log(eventsBetweenDates);
 
-handler.getByMonth(6);
