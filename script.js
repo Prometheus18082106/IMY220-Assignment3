@@ -7,3 +7,11 @@ var events = [
     {name: "Music festival", description: "Weekend long music festival with a ton of artists performing", dateStart: "2022/05/13", dateEnd: "2022/05/15"},
     {name: "Park Picnic", description: "Picnic event in the park", dateStart: "2022/06/12", dateEnd: "2022/06/12"}
 ];
+
+
+var handler = new EventHandler(events);
+console.log(handler.events);
+var eventsBetweenDates = handler.getEventsBetweenDates("2022/02/01", "2022/02/16");
+console.log(eventsBetweenDates);
+
+handler.getByMonth(6);
