@@ -104,10 +104,16 @@ console.log(handler.getSummary());
 var arrEvents = [handler.events[2], handler.events[3], handler.events[4]];
 console.log(handler.getSummary(arrEvents));
 
+
+
+
 //ADD EventHandler METHODS TO ARRAY PROTOTYPE
-Array.prototype.getByMonth = EventHandler.prototype.getByMonth;
-Array.prototype.getEventsBetweenDates = EventHandler.prototype.getEventsBetweenDates;
-Array.prototype.getUniqueDateAndSort = EventHandler.prototype.getUniqueDateAndSort;
-Array.prototype.getSummary = EventHandler.prototype.getSummary;
+Array.prototype.getByMonth = EventHandler.getByMonth;
+Array.prototype.getEventsBetweenDates = EventHandler.getEventsBetweenDates;
+Array.prototype.getUniqueDateAndSort = EventHandler.getUniqueDateAndSort;
+Array.prototype.getSummary = EventHandler.getSummary;
+
+//TEST CHAINED METHODS
+console.log(handler.getByMonth(06).getSummary());
 
 
