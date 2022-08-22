@@ -25,11 +25,56 @@ function EventHandler(events)
     }
 
     this.getUniqueDateAndSort = function(){
+        function checkUniqueDates(event)
+        {
+            return (event.dateStart != event.dateEnd);
+        }
+        var tempEvents = this.events.sort(function(a, b){
+            return (a.dateStart.substring(5,7)) - (b.dateStart.substring(5,7));
+        });
 
+        return tempEvents.filter(checkUniqueDates);
     }
 
     this.getSummary = function(){
+        var events;
+        var args = Array.prototype.slice.apply(arguments);
+
+        //See if arguments are passed
+        if (args.length > 0)
+        {
+            //If the first argument is an array assign it as the array to use
+            if (args[0].constructor === Array)
+            {
+                events = args[0];
+            }
+            else{
+                //else, just assign the arguments array to the working array
+                events = args;
+            }
+        }
+        else
+        {
+            //other wise use member array
+            events = this.events;
+        }
         
+        returnArray = [];
+        // console.log(events); //Go on here...............
+        
+        events.map(function(x){
+            // console.log(x);
+            data = "On " + x.dateStart;
+            if (x.dateStart != x.dateEnd)
+            {
+                data += " to " + x.dateEnd ;
+            }
+            data += ": " + x.name + " (" + x.description + ")";
+
+            returnArray.push(data);
+        });
+
+        return returnArray;
     }
 }
 
@@ -46,9 +91,23 @@ console.log(eventsBetweenDates);
 console.log(handler.getByMonth("06"));
 
 
+//TEST getUniqueDateAndSort
+console.log(handler.getUniqueDateAndSort());
+
+
+//TEST getSummary
+console.log(handler.getSummary(handler.events[0]));
+console.log(handler.getSummary(handler.events[5]));
+console.log(handler.getSummary(handler.events[5], handler.events[0]));
+console.log(handler.getSummary());
+
+var arrEvents = [handler.events[2], handler.events[3], handler.events[4]];
+console.log(handler.getSummary(arrEvents));
+
 //ADD EventHandler METHODS TO ARRAY PROTOTYPE
 Array.prototype.getByMonth = EventHandler.prototype.getByMonth;
 Array.prototype.getEventsBetweenDates = EventHandler.prototype.getEventsBetweenDates;
 Array.prototype.getUniqueDateAndSort = EventHandler.prototype.getUniqueDateAndSort;
 Array.prototype.getSummary = EventHandler.prototype.getSummary;
+
 
