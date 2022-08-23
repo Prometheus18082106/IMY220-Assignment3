@@ -39,6 +39,7 @@ function EventHandler(events)
     this.getSummary = function(){
         var events;
         var args = Array.prototype.slice.apply(arguments);
+        console.log(args);
 
         //See if arguments are passed
         if (args.length > 0)
@@ -96,24 +97,44 @@ console.log(handler.getUniqueDateAndSort());
 
 
 //TEST getSummary
-console.log(handler.getSummary(handler.events[0]));
-console.log(handler.getSummary(handler.events[5]));
-console.log(handler.getSummary(handler.events[5], handler.events[0]));
-console.log(handler.getSummary());
+// console.log(handler.getSummary(handler.events[0]));
+// console.log(handler.getSummary(handler.events[5]));
+// console.log(handler.getSummary(handler.events[5], handler.events[0]));
+// console.log(handler.getSummary());
 
 var arrEvents = [handler.events[2], handler.events[3], handler.events[4]];
-console.log(handler.getSummary(arrEvents));
+// console.log(handler.getSummary(arrEvents));
 
 
 
 
 //ADD EventHandler METHODS TO ARRAY PROTOTYPE
-Array.prototype.getByMonth = EventHandler.getByMonth;
-Array.prototype.getEventsBetweenDates = EventHandler.getEventsBetweenDates;
-Array.prototype.getUniqueDateAndSort = EventHandler.getUniqueDateAndSort;
-Array.prototype.getSummary = EventHandler.getSummary;
+// Array.prototype.getByMonth = function(month){
+//     var newHandler = new EventHandler(this);
+//     newHandler.getByMonth(month)
+//     return newHandler;
+// };
+Array.prototype.getByMonth = function(month){
+    return new EventHandler(this).getByMonth(month);
+};
+Array.prototype.getEventsBetweenDates = function(a, b){
+    new EventHandler(this).getEventsBetweenDates(a, b)
+};
+
+Array.prototype.getUniqueDateAndSort = function(){
+    new EventHandler(this).getUniqueDateAndSort();
+};
+
+Array.prototype.getSummary = function(){
+    return new EventHandler(this).getSummary(this);
+};
+
+// Array.prototype.getByMonth = EventHandler.getByMonth;
+// Array.prototype.getEventsBetweenDates = EventHandler.getEventsBetweenDates;
+// Array.prototype.getUniqueDateAndSort = EventHandler.getUniqueDateAndSort;
+// Array.prototype.getSummary = EventHandler.getSummary;
 
 //TEST CHAINED METHODS
-console.log(handler.getByMonth(06).getSummary());
+console.log(handler.getByMonth("06").getSummary());
 
 
