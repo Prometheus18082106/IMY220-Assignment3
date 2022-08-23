@@ -39,7 +39,7 @@ function EventHandler(events)
     this.getSummary = function(){
         var events;
         var args = Array.prototype.slice.apply(arguments);
-        console.log(args);
+        // console.log(args);
 
         //See if arguments are passed
         if (args.length > 0)
@@ -81,19 +81,19 @@ function EventHandler(events)
 
 //CREATE INSTANCE OF EventHandler
 var handler = new EventHandler(events);
-console.log(handler.events);
+// console.log(handler.events);
 
 //TEST getEventsBetweenDates
 var eventsBetweenDates = handler.getEventsBetweenDates("2022/02/01", "2022/02/16");
-console.log(eventsBetweenDates);
+// console.log(eventsBetweenDates);
 
 
 //TEST getByMonth
-console.log(handler.getByMonth("06"));
+// console.log(handler.getByMonth("06"));
 
 
 //TEST getUniqueDateAndSort
-console.log(handler.getUniqueDateAndSort());
+// console.log(handler.getUniqueDateAndSort());
 
 
 //TEST getSummary
@@ -135,6 +135,6 @@ Array.prototype.getSummary = function(){
 // Array.prototype.getSummary = EventHandler.getSummary;
 
 //TEST CHAINED METHODS
-console.log(handler.getByMonth("06").getSummary());
+// console.log(handler.getByMonth("06").getSummary());
 
 
